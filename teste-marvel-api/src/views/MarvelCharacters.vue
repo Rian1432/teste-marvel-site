@@ -1,18 +1,22 @@
 <template>
-  <div class="home sm:m-12">
-    <img alt="Vue logo" class="m-auto" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="sm:m-12">
+    <hr class="mb-5">
+    <h1 class="text-3xl text-justify mb-8 font-semibold text-gray-800">Marvel characters:</h1>
+    <DashboardView />
+    <hr class="my-5">
+    <CharacterPagination />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import DashboardView from '../components/dashboard.vue'
+import CharacterPagination from '../components/Pagination.vue'
 
 export default {
-  name: 'HomeView',
+  name: 'MarvelCharacters',
   components: {
-    HelloWorld
+    DashboardView,
+    CharacterPagination
   }
 }
 </script>

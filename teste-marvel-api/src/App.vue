@@ -1,19 +1,14 @@
 <template>
   <div>
-    <nav class="navbar bg-neutral">
-      <router-link class="btn rounded-sm" to="/">Home</router-link> |
-      <router-link class="btn rounded-sm" to="/about">About</router-link>
-    </nav>
-    <router-view/>
-    <DashboardView />
+    <TopBar />
   </div>
 </template>
 <script>
-import DashboardView from './components/dashboard.vue'
+import TopBar from './components/TopBar.vue'
 
 export default {
   components: {
-    DashboardView
+    TopBar
   }
 }
 </script>
@@ -24,15 +19,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
   color: #2c3e50;
 }
 
