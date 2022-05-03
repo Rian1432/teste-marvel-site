@@ -1,9 +1,8 @@
 <template>
   <div class="sm:m-12">
-    <hr class="mb-5">
-    <h1 class="text-3xl sm:text-justify text-center mb-8 font-semibold text-gray-800">Marvel characters:</h1>
+    <hr class="mb-5 opacity-30">
+    <h1 class="text-3xl sm:text-justify text-center mb-8 font-semibold text-realGray">Marvel characters:</h1>
     <DashboardView />
-    <hr class="my-5">
   </div>
 </template>
 

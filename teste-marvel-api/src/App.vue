@@ -1,14 +1,21 @@
 <template>
   <div>
     <TopBar />
+    <div class="top w-full h-40 flex justify-center opacity-90">
+      <img src="@/assets/marvel-logo.png" alt="marvel logo">
+    </div>
+    <router-view/>
+    <FooterPage />
   </div>
 </template>
 <script>
+import FooterPage from './components/Footer.vue'
 import TopBar from './components/TopBar.vue'
 
 export default {
   components: {
-    TopBar
+    TopBar,
+    FooterPage
   }
 }
 </script>
@@ -24,5 +31,9 @@ export default {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.top {
+  background-image: url(./assets/hqs.jpg);
 }
 </style>

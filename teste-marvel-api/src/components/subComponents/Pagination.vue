@@ -1,8 +1,8 @@
 <template>
   <div class="btn-group justify-center mt-5">
-    <button @click="prev" class="btn bg-gray-900">«</button>
-    <button class="btn bg-gray-900 normal-case">{{ 'Page ' + page }}</button>
-    <button @click="next" class="btn bg-gray-900">»</button>
+    <button @click="prev" class="btn bg-realGray hover:bg-black">«</button>
+    <button class="btn bg-realGray hover:bg-black normal-case">{{ 'Page ' + page }}</button>
+    <button @click="next" class="btn bg-realGray hover:bg-black">»</button>
   </div>
 </template>
 
