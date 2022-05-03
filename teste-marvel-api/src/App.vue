@@ -2,7 +2,7 @@
   <div>
     <TopBar />
     <div class="top w-full h-40 flex justify-center opacity-90">
-      <img src="@/assets/marvel-logo.png" alt="marvel logo">
+      <img src="@/assets/images/marvel-logo.png" alt="marvel logo">
     </div>
     <router-view/>
     <FooterPage />
@@ -30,10 +30,11 @@ export default {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #EF131E;
+  border-color: #EF131E;
 }
 
 .top {
-  background-image: url(./assets/hqs.jpg);
+  background-image: url(./assets/images/hqs.jpg);
 }
 </style>
