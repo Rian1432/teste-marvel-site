@@ -8,7 +8,9 @@
     </div>
     <div class="flex flex-wrap justify-around">
       <span v-for="(index, key) in names" :key="key">
-        <CardCharacter :name="names[key]" :img="images[key]" />
+        <router-link to="/CharacterView" :page="page">
+          <CardCharacter :name="names[key]" :img="images[key]" />
+        </router-link>
       </span>
     </div>
     <div>
