@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MarvelCharacters from '../views/MarvelCharacters.vue'
-import CharacterView from '../views/CharacterPage.vue'
+import CharacterPage from '../views/CharacterPage.vue'
 
 const routes = [
   {
@@ -9,9 +9,9 @@ const routes = [
     component: MarvelCharacters
   },
   {
-    path: '/CharacterView',
-    name: 'CharacterView',
-    component: CharacterView,
+    path: '/CharacterPage/:info',
+    name: 'CharacterPage',
+    component: CharacterPage,
     props: true
   }
 ]

@@ -8,7 +8,7 @@
     </div>
     <div class="flex flex-wrap justify-around">
       <span v-for="(index, key) in names" :key="key">
-        <router-link to="/CharacterView" :page="page">
+        <router-link :to="`/CharacterPage/${(characterInfo[key])}`">
           <CardCharacter :name="names[key]" :img="images[key]" />
         </router-link>
       </span>
@@ -34,6 +34,7 @@ export default {
     return {
       names: null,
       images: null,
+      characterInfo: null,
       page: 1,
       filters: {
         offset: 0,
@@ -50,6 +51,8 @@ export default {
         .then(response => {
           this.getNames(response)
           this.getImages(response)
+          this.disableButton(response)
+          this.getCharacterInfo(response)
         })
     },
     getNames (response) {
@@ -58,11 +61,6 @@ export default {
         names.push(response.data.data.results[key].name)
       }
       this.names = names
-      if (response.data.data.results.length < 12) {
-        this.clickable = false
-      } else {
-        this.clickable = true
-      }
     },
     getImages (response) {
       const img = []
@@ -70,6 +68,13 @@ export default {
         img.push(response.data.data.results[key].thumbnail)
       }
       this.images = img
+    },
+    getCharacterInfo (response) {
+      const info = []
+      for (const key in response.data.data.results) {
+        info.push(response.data.data.results[key].id)
+      }
+      this.characterInfo = info
     },
     prev () {
       if (this.page > 1) {
@@ -97,6 +102,13 @@ export default {
           this.getCharacters()
         }
       }, 300)
+    },
+    disableButton (res) {
+      if (this.filters.offset === (res.data.data.total - 12)) {
+        this.clickable = false
+      } else {
+        this.clickable = true
+      }
     }
   },
   created () {
