@@ -10,7 +10,8 @@
         <li class="mb-2 ml-8 font-semibold">
           Comics names:
           <span v-for="(key, index) in apparitions" :key="key" class="font-normal">
-            {{ apparitions[index].name }} </span>.
+            {{ apparitions[index].name }}
+            </span>.
         </li>
       </ul>
     </div>

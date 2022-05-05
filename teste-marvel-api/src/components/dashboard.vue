@@ -47,11 +47,11 @@ export default {
   methods: {
     getCharacters () {
       const axios = require('axios')
-      axios.get(`https://gateway.marvel.com/v1/public/characters?${this.filters.nameStartsWith}ts=1651173406&apikey=073cb8bc1b1f27efdf9e8e03bcd37538&hash=6090660246a100b83252fc7aadc06510&limit=12&offset=${this.filters.offset}`)
+      axios.get(`https://gateway.marvel.com/v1/public/characters?${this.filters.nameStartsWith}ts=1651173406&apikey=073cb8bc1b1f27efdf9e8e03bcd37538&hash=6090660246a100b83252fc7aadc06510`, { params: { limit: 12, offset: this.filters.offset } })
         .then(response => {
+          this.disableButton(response)
           this.getNames(response)
           this.getImages(response)
-          this.disableButton(response)
           this.getCharacterInfo(response)
         })
     },
@@ -104,7 +104,7 @@ export default {
       }, 300)
     },
     disableButton (res) {
-      if (this.filters.offset === (res.data.data.total - 12)) {
+      if (this.filters.offset >= (res.data.data.total - 12)) {
         this.clickable = false
       } else {
         this.clickable = true

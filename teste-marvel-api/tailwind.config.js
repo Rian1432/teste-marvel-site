@@ -8,6 +8,7 @@ module.exports = {
     colors:{
       'realGray': '#202020',
       'black': '#000000',
+      'red': '#EF131E'
     }
   },
   plugins: [require("daisyui")],
