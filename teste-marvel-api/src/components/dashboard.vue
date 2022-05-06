@@ -7,6 +7,7 @@
       </div>
     </div>
     <div class="flex flex-wrap justify-around">
+      <LoaderData v-if="loader"/>
       <span v-for="(index, key) in names" :key="key">
         <router-link :to="`/CharacterPage/${(characterInfo[key])}`">
           <CardCharacter :name="names[key]" :img="images[key]" />
@@ -21,6 +22,7 @@
 
 <script>
 import CardCharacter from './subComponents/card.vue'
+import LoaderData from './subComponents/Loader.vue'
 import CharacterPagination from '../components/subComponents/Pagination.vue'
 
 export default {
@@ -28,7 +30,8 @@ export default {
   emits: ['prev', 'next'],
   components: {
     CardCharacter,
-    CharacterPagination
+    CharacterPagination,
+    LoaderData
   },
   data () {
     return {
@@ -36,18 +39,32 @@ export default {
       images: null,
       characterInfo: null,
       page: 1,
+      clickable: true,
+      loader: true,
       filters: {
         offset: 0,
         input: '',
         nameStartsWith: ''
       },
-      clickable: true
+      url: {
+        ts: '1651173406',
+        apikey: '073cb8bc1b1f27efdf9e8e03bcd37538',
+        hash: '6090660246a100b83252fc7aadc06510'
+      }
     }
   },
   methods: {
-    getCharacters () {
+    async getCharacters () {
       const axios = require('axios')
-      axios.get(`https://gateway.marvel.com/v1/public/characters?${this.filters.nameStartsWith}ts=1651173406&apikey=073cb8bc1b1f27efdf9e8e03bcd37538&hash=6090660246a100b83252fc7aadc06510`, { params: { limit: 12, offset: this.filters.offset } })
+      axios.get(`https://gateway.marvel.com/v1/public/characters?${this.filters.nameStartsWith}`, {
+        params: {
+          ts: this.url.ts,
+          apikey: this.url.apikey,
+          hash: this.url.hash,
+          limit: 12,
+          offset: this.filters.offset
+        }
+      })
         .then(response => {
           this.disableButton(response)
           this.getNames(response)
@@ -61,6 +78,7 @@ export default {
         names.push(response.data.data.results[key].name)
       }
       this.names = names
+      this.loader = false
     },
     getImages (response) {
       const img = []

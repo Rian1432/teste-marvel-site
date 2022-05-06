@@ -5,18 +5,13 @@
       <img src="@/assets/images/marvel-logo.png" alt="marvel logo">
     </div>
     <router-view/>
-    <FooterPage />
   </div>
 </template>
 <script>
-import FooterPage from './components/Footer.vue'
 import TopBar from './components/TopBar.vue'
 
 export default {
-  components: {
-    TopBar,
-    FooterPage
-  }
+  components: { TopBar }
 }
 </script>
 
