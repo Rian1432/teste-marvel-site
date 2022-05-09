@@ -21,7 +21,7 @@
         <li class="mb-2 ml-8 font-semibold cursor-pointer">
           Comics names:
           <span v-for="(key, index) in apparitions" :key="key" class="font-normal hover:text-red">
-            | {{ apparitions[index].name }}
+            | <a :href="comicsUrls[index]" target="_blank">{{ apparitions[index].name }}</a>
           </span>.
         </li>
       </ul>
@@ -32,7 +32,47 @@
 <script>
 export default {
   name: 'PerfilCharacter',
-  props: ['name', 'description', 'comics', 'image', 'apparitions']
+  props: ['name', 'description', 'comics', 'image', 'apparitions'],
+  data () {
+    return {
+      comicsUrls: [],
+      url: {
+        ts: '1651173406',
+        apikey: '073cb8bc1b1f27efdf9e8e03bcd37538',
+        hash: '6090660246a100b83252fc7aadc06510'
+      }
+    }
+  },
+  methods: {
+    async getComicsLinks (url) {
+      const axios = require('axios')
+      axios.get(url, {
+        params: {
+          ts: this.url.ts,
+          apikey: this.url.apikey,
+          hash: this.url.hash,
+          limit: 1
+        }
+      })
+        .then(response => {
+          this.getLinks(response)
+          return response
+        })
+    },
+    prepareLinks () {
+      const urls = []
+      for (const key in this.apparitions) {
+        urls.push(this.apparitions[key].resourceURI)
+        this.getComicsLinks(urls[key])
+      }
+    },
+    getLinks (res) {
+      this.comicsUrls.push(res.data.data.results[0].urls[0].url)
+    }
+  },
+  created () {
+    this.prepareLinks()
+  }
 }
 </script>
 

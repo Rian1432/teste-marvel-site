@@ -1,7 +1,7 @@
 <template>
     <div>
       <LoaderData v-if="loader" />
-      <perfil-character v-if="perfil" :name="name" :description="description" :comics="comics" :image="image" :apparitions="apparitions"/>
+      <PerfilCharacter v-if="perfil" :name="name" :description="description" :comics="comics" :image="image" :apparitions="apparitions"/>
     </div>
 </template>
 
