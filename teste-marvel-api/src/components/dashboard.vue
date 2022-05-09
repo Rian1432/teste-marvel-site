@@ -15,7 +15,7 @@
       </span>
     </div>
     <div>
-      <CharacterPagination :page="page" :clickable="clickable" @prev="prev()" @next="next()" />
+      <CharacterPagination :totalPages="totalPages" @selectPage="selectPage" />
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ import CharacterPagination from '../components/subComponents/Pagination.vue'
 
 export default {
   name: 'DashboardView',
-  emits: ['prev', 'next'],
+  emits: ['selectPage'],
   components: {
     CardCharacter,
     CharacterPagination,
@@ -38,8 +38,7 @@ export default {
       names: null,
       images: null,
       characterInfo: null,
-      page: 1,
-      clickable: true,
+      totalPages: null,
       loader: true,
       filters: {
         offset: 0,
@@ -54,7 +53,7 @@ export default {
     }
   },
   methods: {
-    async getCharacters () {
+    getCharacters () {
       const axios = require('axios')
       axios.get(`https://gateway.marvel.com/v1/public/characters?${this.filters.nameStartsWith}`, {
         params: {
@@ -66,10 +65,10 @@ export default {
         }
       })
         .then(response => {
-          this.disableButton(response)
           this.getNames(response)
           this.getImages(response)
           this.getCharacterInfo(response)
+          this.pagination(response)
         })
     },
     getNames (response) {
@@ -94,18 +93,12 @@ export default {
       }
       this.characterInfo = info
     },
-    prev () {
-      if (this.page > 1) {
-        this.page = this.page - 1
-      }
-      if (this.filters.offset > 0) {
-        this.filters.offset -= 12
-        this.getCharacters()
-      }
+    pagination (res) {
+      const totalCharacters = res.data.data.total
+      this.totalPages = Math.ceil(totalCharacters / 12)
     },
-    next () {
-      this.page = this.page + 1
-      this.filters.offset += 12
+    selectPage (page) {
+      this.filters.offset = page
       this.getCharacters()
     },
     searchCharacter () {
@@ -120,13 +113,6 @@ export default {
           this.getCharacters()
         }
       }, 300)
-    },
-    disableButton (res) {
-      if (this.filters.offset >= (res.data.data.total - 12)) {
-        this.clickable = false
-      } else {
-        this.clickable = true
-      }
     }
   },
   created () {
