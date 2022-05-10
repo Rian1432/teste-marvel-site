@@ -46,7 +46,7 @@ export default {
   methods: {
     async getComicsLinks (url) {
       const axios = require('axios')
-      axios.get(url, {
+      const response = await axios.get(url, {
         params: {
           ts: this.url.ts,
           apikey: this.url.apikey,
@@ -54,24 +54,20 @@ export default {
           limit: 1
         }
       })
-        .then(response => {
-          this.getLinks(response)
-          return response
-        })
+      console.log(response.data.data.results[0].urls[0].url)
+      const link = response.data.data.results[0].urls[0].url
+      this.comicsUrls.push(link)
     },
-    prepareLinks () {
-      const urls = []
+    comicsLinks () {
       for (const key in this.apparitions) {
-        urls.push(this.apparitions[key].resourceURI)
-        this.getComicsLinks(urls[key])
+        setTimeout(() => {
+          this.getComicsLinks(this.apparitions[key].resourceURI)
+        }, 100)
       }
-    },
-    getLinks (res) {
-      this.comicsUrls.push(res.data.data.results[0].urls[0].url)
     }
   },
   created () {
-    this.prepareLinks()
+    this.comicsLinks()
   }
 }
 </script>

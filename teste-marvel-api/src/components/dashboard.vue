@@ -15,7 +15,7 @@
       </span>
     </div>
     <div>
-      <CharacterPagination :totalPages="totalPages" @selectPage="selectPage" />
+      <CharacterPagination v-if="totalPages > 1" :totalPages="totalPages" @selectPage="selectPage" />
     </div>
   </div>
 </template>
