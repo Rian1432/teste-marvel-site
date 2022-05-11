@@ -101,12 +101,14 @@ export default {
       this.filters.offset = page
       this.getCharacters()
     },
+    setUrl (value) {
+      this.$router.replace({ query: { search: value } })
+    },
     searchCharacter () {
       this.filters.offset = 0
-      this.page = 1
       setTimeout(() => {
-        if (this.filters.input !== '') {
-          this.filters.nameStartsWith = `nameStartsWith=${this.filters.input}&`
+        if (this.$route.query.search !== '') {
+          this.filters.nameStartsWith = `nameStartsWith=${this.$route.query.search}&`
           this.getCharacters()
         } else {
           this.filters.nameStartsWith = ''
@@ -116,7 +118,11 @@ export default {
     }
   },
   created () {
+    this.$watch('filters.input', (newValue) => {
+      this.setUrl(newValue)
+    })
     this.getCharacters()
+    this.searchCharacter()
   }
 }
 </script>

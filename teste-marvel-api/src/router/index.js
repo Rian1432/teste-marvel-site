@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MarvelCharacters from '../views/MarvelCharacters.vue'
-import CharacterPage from '../views/CharacterPage.vue'
-import pageNotFound from '../views/pageNotFound.vue'
+const MarvelCharacters = () => import('../views/MarvelCharacters.vue')
+const CharacterPage = () => import('../views/CharacterPage.vue')
+const pageNotFound = () => import('../views/pageNotFound.vue')
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: MarvelCharacters
+    name: 'Home',
+    component: MarvelCharacters,
+    query: { search: '' }
   },
   {
     path: '/CharacterPage/:info',
@@ -17,7 +18,7 @@ const routes = [
   },
   {
     path: '/:pathMatch(.*)*',
-    name: 'pageNotFound',
+    name: 'PageNotFound',
     component: pageNotFound
   }
 ]

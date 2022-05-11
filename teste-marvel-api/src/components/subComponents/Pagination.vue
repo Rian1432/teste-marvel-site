@@ -1,5 +1,5 @@
 <template>
-  <div v-if="page == 1 || page == 2" class="btn-group mt-5 justify-center">
+  <div v-if="page == 1 || page == 2" class="btn-group mt-5 justify-center mb-10">
     <button v-if="page !== 1" @click="$emit('selectPage', prev());" class="btn bg-realGray hover:bg-black normal-case">{{ page - 1 }}</button>
     <button class="btn bg-red border-red hover:bg-black normal-case">{{ page }}</button>
     <button v-if="page !== totalPages" @click="$emit('selectPage', next())" class="btn bg-realGray hover:bg-black normal-case">{{ page + 1 }}</button>
@@ -7,14 +7,14 @@
     <button v-if="totalPages >= 5" class="btn bg-realGray hover:bg-black normal-case"> ... </button>
     <button v-if="totalPages >= 5" @click="$emit('selectPage', lastPage())" class="btn bg-realGray hover:bg-black normal-case">{{ totalPages }}</button>
   </div>
-  <div v-else-if="page == totalPages" class="btn-group mt-5 justify-center">
+  <div v-else-if="page == totalPages" class="btn-group mt-5 justify-center mb-10">
     <button v-if="totalPages >= 5" @click="$emit('selectPage', primaryPage());" class="btn bg-realGray hover:bg-black normal-case">{{ initialPage }}</button>
     <button v-if="totalPages >= 5" class="btn bg-realGray hover:bg-black normal-case"> ... </button>
     <button @click="$emit('selectPage', doublePrev())" class="btn bg-realGray hover:bg-black normal-case">{{ page - 2 }}</button>
     <button @click="$emit('selectPage', prev())" class="btn bg-realGray hover:bg-black normal-case">{{ page - 1 }}</button>
     <button class="btn bg-red border-red hover:bg-black normal-case">{{ totalPages }}</button>
   </div>
-  <div v-else-if="page > 2 && page < totalPages" class="btn-group mt-5 justify-center">
+  <div v-else-if="page > 2 && page < totalPages" class="btn-group mt-5 justify-center mb-10">
     <button @click="$emit('selectPage', primaryPage());" class="btn bg-realGray hover:bg-black normal-case">{{ initialPage }}</button>
     <button class="btn bg-realGray hover:bg-black normal-case"> ... </button>
     <button @click="$emit('selectPage', prev());" class="btn bg-realGray hover:bg-black normal-case">{{ page - 1 }}</button>
@@ -52,7 +52,7 @@ export default {
     },
     doubleNext () {
       this.page += 2
-      const num = (12 * this.page)
+      const num = (12 * this.page) - 12
       return num
     },
     doublePrev () {

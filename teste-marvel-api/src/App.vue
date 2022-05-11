@@ -1,7 +1,7 @@
 <template>
   <div>
     <TopBar />
-    <div class="top w-full h-40 flex justify-center opacity-90">
+    <div class="top w-full h-36 flex justify-center opacity-90">
       <img src="@/assets/images/marvel-logo.png" alt="marvel logo">
     </div>
     <router-view/>
