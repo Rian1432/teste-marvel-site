@@ -118,10 +118,10 @@ export default {
     }
   },
   created () {
+    this.getCharacters()
     this.$watch('filters.input', (newValue) => {
       this.setUrl(newValue)
     })
-    this.getCharacters()
     this.searchCharacter()
   }
 }

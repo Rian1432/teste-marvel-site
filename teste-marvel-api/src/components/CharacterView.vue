@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import PerfilCharacter from './subComponents/Perfil.vue'
+import PerfilCharacter from './Perfil.vue'
 import LoaderData from './subComponents/Loader.vue'
 
 export default {
