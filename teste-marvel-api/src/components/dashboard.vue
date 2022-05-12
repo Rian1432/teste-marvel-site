@@ -3,7 +3,7 @@
     <div class="flex justify-center sm:justify-end mb-5 mx-8">
       <div class="flex bg-realGray rounded-md p-1 text-base-100">
           <img src="../assets/images/search_icon.svg" class="pl-2" alt="" srcset="">
-          <input type="text" class="font-semibold outline-none ml-2 rounded-sm p-1 text-realGray" @keyup="searchCharacter" v-model="filters.input">
+          <input type="text" class="font-semibold outline-none ml-2 rounded-sm p-1 text-realGray" v-model="filters.input">
       </div>
     </div>
     <div class="flex flex-wrap justify-around">
@@ -101,28 +101,31 @@ export default {
       this.filters.offset = page
       this.getCharacters()
     },
-    setUrl (value) {
-      this.$router.replace({ query: { search: value } })
-    },
-    searchCharacter () {
+    searchCharacter (value) {
       this.filters.offset = 0
+      value !== '' ? this.$router.replace({ query: { search: value } }) : this.$router.replace({ query: { search: null } })
       setTimeout(() => {
-        if (this.$route.query.search !== '') {
+        if (this.$route.query.search !== null) {
           this.filters.nameStartsWith = `nameStartsWith=${this.$route.query.search}&`
           this.getCharacters()
         } else {
           this.filters.nameStartsWith = ''
           this.getCharacters()
         }
-      }, 300)
+      }, 100)
+    }
+  },
+  watch: {
+    'filters.input' (newValue) {
+      this.searchCharacter(newValue)
     }
   },
   created () {
-    this.getCharacters()
-    this.$watch('filters.input', (newValue) => {
-      this.setUrl(newValue)
-    })
-    this.searchCharacter()
+    if (this.$route.query.search != null) {
+      this.searchCharacter(this.$route.query.search)
+    } else {
+      this.getCharacters()
+    }
   }
 }
 </script>

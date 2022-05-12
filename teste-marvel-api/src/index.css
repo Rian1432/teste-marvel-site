@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .btn-unselected {
+        @apply btn bg-realGray hover:bg-black normal-case
+    }
+    .btn-selected {
+        @apply btn bg-red border-red hover:bg-red hover:border-red normal-case
+    }
+}

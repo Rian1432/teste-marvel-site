@@ -4,14 +4,14 @@
       <div class="sm:m-0 m-5">
         <img :src="image" alt="character image" class="image-shadow border-2 m-2 mt-0  min-w-min">
       </div>
-      <div>
+      <div class="md:w-auto w-full">
         <div class="nameCharacter bg-realGray p-5 relative after:hidden md:after:block">
           <h3 class="text-primary-content text-3xl sm:text-5xl">
             {{ name }}
           </h3>
         </div>
         <div class="text-left max-w-lg mt-5">
-          <div class="mb-2 ml-8">
+          <div class="mb-2 md:ml-8 m-5">
             <span class="font-semibold">Description:</span>
             {{ description }}
           </div>
@@ -20,8 +20,8 @@
     </div>
     <div class="my-8">
       <hr class="max-w-3xl m-auto">
-      <h4 class="text-2xl font-medium text-realGray max-w-3xl m-auto text-left mt-5">Comics: {{ comics }}</h4>
-      <div class="flex flex-wrap max-w-3xl m-auto mt-5">
+      <h4 class="text-2xl font-medium text-realGray max-w-3xl m-auto text-left mt-5 pl-2">Comics: {{ comics }}</h4>
+      <div class="flex flex-wrap justify-center max-w-3xl m-auto mt-5">
         <span v-for="(index, key) in comicsInfo.title" :key="key" class="image-shadow border border-realGray hover:scale-105 duration-300 m-4">
           <a :href="comicsInfo.link[key]" target="_blank" :title="comicsInfo.title[key]"><img :src="comicsInfo.image[key]" alt="comic image"></a>
         </span>
@@ -74,7 +74,6 @@ export default {
       this.comicsInfo.title.push(title)
       this.comicsInfo.link.push(link)
       this.comicsInfo.image.push(image)
-      console.log(this.comicsInfo.title)
     },
     getImage (res) {
       const img = res.data.data.results[0].thumbnail

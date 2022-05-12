@@ -8,7 +8,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: MarvelCharacters,
-    query: { search: '' }
+    query: { search: null }
   },
   {
     path: '/CharacterPage/:info',
