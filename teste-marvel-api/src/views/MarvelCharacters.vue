@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import DashboardView from '../components/dashboard.vue'
+import DashboardView from '@/components/dashboard.vue'
 
 export default {
   name: 'MarvelCharacters',

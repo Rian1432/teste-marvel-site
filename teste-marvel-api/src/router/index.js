@@ -1,17 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
-const MarvelCharacters = () => import('../views/MarvelCharacters.vue')
-const CharacterPage = () => import('../views/CharacterPage.vue')
-const pageNotFound = () => import('../views/pageNotFound.vue')
+const MarvelCharacters = () => import('@/views/MarvelCharacters.vue')
+const CharacterPage = () => import('@/views/CharacterPage.vue')
+const pageNotFound = () => import('@/views/pageNotFound.vue')
 
 const routes = [
   {
-    path: '/',
+    path: '/:id',
     name: 'Home',
     component: MarvelCharacters,
     query: { search: null }
   },
   {
-    path: '/CharacterPage/:info',
+    path: '/CharacterPage/:id',
     name: 'CharacterPage',
     component: CharacterPage,
     props: true

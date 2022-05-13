@@ -7,7 +7,7 @@
         <button class="btn mt-5 bg-primary-content border-2 border-realGray text-realGray hover:bg-realGray hover:border-realGray hover:text-primary-content">Home</button>
       </router-link>
     </div>
-    <img class="max-w-md w-full" src="../assets/images/404.png" alt="404 page not found">
+    <img class="max-w-md w-full" src="@/assets/images/404.png" alt="404 page not found">
   </div>
 </template>
 

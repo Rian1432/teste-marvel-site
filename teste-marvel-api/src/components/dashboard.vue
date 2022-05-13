@@ -9,7 +9,7 @@
     <div class="flex flex-wrap justify-around">
       <LoaderData v-if="loader"/>
       <span v-for="(index, key) in names" :key="key">
-        <router-link :to="`/CharacterPage/${(characterInfo[key])}`">
+        <router-link :to="`/CharacterPage/${(characterId[key])}`">
           <CardCharacter :name="names[key]" :img="images[key]" />
         </router-link>
       </span>
@@ -37,12 +37,12 @@ export default {
     return {
       names: null,
       images: null,
-      characterInfo: null,
+      characterId: null,
       totalPages: null,
       loader: true,
       filters: {
         offset: 0,
-        input: '',
+        input: this.$route.query.search,
         nameStartsWith: ''
       },
       url: {
@@ -65,33 +65,23 @@ export default {
         }
       })
         .then(response => {
-          this.getNames(response)
-          this.getImages(response)
           this.getCharacterInfo(response)
           this.pagination(response)
         })
     },
-    getNames (response) {
+    getCharacterInfo (response) {
       const names = []
+      const img = []
+      const id = []
       for (const key in response.data.data.results) {
         names.push(response.data.data.results[key].name)
+        img.push(response.data.data.results[key].thumbnail)
+        id.push(response.data.data.results[key].id)
       }
       this.names = names
-      this.loader = false
-    },
-    getImages (response) {
-      const img = []
-      for (const key in response.data.data.results) {
-        img.push(response.data.data.results[key].thumbnail)
-      }
       this.images = img
-    },
-    getCharacterInfo (response) {
-      const info = []
-      for (const key in response.data.data.results) {
-        info.push(response.data.data.results[key].id)
-      }
-      this.characterInfo = info
+      this.characterId = id
+      this.loader = false
     },
     pagination (res) {
       const totalCharacters = res.data.data.total
