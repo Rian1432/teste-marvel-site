@@ -68,7 +68,6 @@ export default {
           this.getCharacterInfo(response)
           this.pagination(response)
         })
-      console.log('ativada')
     },
     getCharacterInfo (response) {
       const names = []
