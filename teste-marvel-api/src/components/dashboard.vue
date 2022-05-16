@@ -97,11 +97,10 @@ export default {
       setTimeout(() => {
         if (this.$route.query.search !== null) {
           this.filters.nameStartsWith = `nameStartsWith=${this.$route.query.search}&`
-          this.getCharacters()
         } else {
           this.filters.nameStartsWith = ''
-          this.getCharacters()
         }
+        this.getCharacters()
       }, 100)
     }
   },
@@ -113,6 +112,9 @@ export default {
   created () {
     if (this.$route.query.search != null) {
       this.searchCharacter(this.$route.query.search)
+    } else if (this.$route.query.page !== null) {
+      const num = (this.$route.query.page * 12) - 12
+      this.selectPage(num)
     } else {
       this.getCharacters()
     }

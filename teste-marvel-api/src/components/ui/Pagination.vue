@@ -45,7 +45,6 @@ export default {
     routePage () {
       if (this.$route.query.page !== undefined) {
         this.page = parseInt(this.$route.query.page)
-        this.$emit('selectPage', (12 * this.page) - 12)
       }
     },
     replacePage (type) {
