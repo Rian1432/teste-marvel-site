@@ -9,4 +9,7 @@
     .btn-selected {
         @apply btn bg-red border-red hover:bg-red hover:border-red normal-case
     }
+    .pagination {
+        @apply btn-group mt-5 justify-center mb-10
+    }
 }

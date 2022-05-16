@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import CardCharacter from './subComponents/card.vue'
-import LoaderData from './subComponents/Loader.vue'
-import CharacterPagination from '../components/subComponents/Pagination.vue'
+import CardCharacter from './ui/card.vue'
+import LoaderData from './ui/Loader.vue'
+import CharacterPagination from '../components/ui/Pagination.vue'
 
 export default {
   name: 'DashboardView',
@@ -93,7 +93,7 @@ export default {
     },
     searchCharacter (value) {
       this.filters.offset = 0
-      value !== '' ? this.$router.replace({ query: { search: value } }) : this.$router.replace({ query: { search: null } })
+      value !== '' ? this.$router.replace({ query: { search: value, page: '1' } }) : this.$router.replace({ query: { search: null, page: '1' } })
       setTimeout(() => {
         if (this.$route.query.search !== null) {
           this.filters.nameStartsWith = `nameStartsWith=${this.$route.query.search}&`

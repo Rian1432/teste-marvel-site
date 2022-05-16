@@ -7,7 +7,7 @@
 
 <script>
 import PerfilCharacter from './Perfil.vue'
-import LoaderData from './subComponents/Loader.vue'
+import LoaderData from './ui/Loader.vue'
 
 export default {
   components: { LoaderData, PerfilCharacter },

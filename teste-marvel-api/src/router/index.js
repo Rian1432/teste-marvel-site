@@ -5,10 +5,10 @@ const pageNotFound = () => import('@/views/pageNotFound.vue')
 
 const routes = [
   {
-    path: '/:id',
+    path: '/',
     name: 'Home',
     component: MarvelCharacters,
-    query: { search: null }
+    query: { search: null, page: null }
   },
   {
     path: '/CharacterPage/:id',
