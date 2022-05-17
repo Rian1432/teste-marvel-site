@@ -16,6 +16,7 @@
     </div>
     <div>
       <CharacterPagination v-if="totalPages > 1" :totalPages="totalPages" @selectPage="selectPage" />
+      <CharacterNotFound v-if="searchNotFound"/>
     </div>
   </div>
 </template>
@@ -24,6 +25,7 @@
 import CardCharacter from './ui/card.vue'
 import LoaderData from './ui/Loader.vue'
 import CharacterPagination from '../components/ui/Pagination.vue'
+import CharacterNotFound from './ui/CharacterNotFound.vue'
 
 export default {
   name: 'DashboardView',
@@ -31,7 +33,8 @@ export default {
   components: {
     CardCharacter,
     CharacterPagination,
-    LoaderData
+    LoaderData,
+    CharacterNotFound
   },
   data () {
     return {
@@ -40,6 +43,7 @@ export default {
       characterId: null,
       totalPages: null,
       loader: true,
+      searchNotFound: false,
       filters: {
         offset: 0,
         input: this.$route.query.search,
@@ -70,6 +74,11 @@ export default {
         })
     },
     getCharacterInfo (response) {
+      if (response.data.data.total === 0) {
+        this.searchNotFound = true
+      } else {
+        this.searchNotFound = false
+      }
       const names = []
       const img = []
       const id = []

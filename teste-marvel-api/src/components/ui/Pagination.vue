@@ -83,7 +83,7 @@ export default {
     }
   },
   watch: {
-    '$route.query.page' (to, from) {
+    '$route.query.page' (to) {
       if (to) {
         this.routePage()
       }
